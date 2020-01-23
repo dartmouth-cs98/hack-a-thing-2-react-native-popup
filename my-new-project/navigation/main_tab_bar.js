@@ -1,6 +1,8 @@
 import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+import Ionicons from 'react-native-vector-icons/FontAwesome';
+import About from '../components/about';
 import { View, Text } from 'react-native';
 
 const AboutTab = props => {
@@ -22,7 +24,15 @@ const SearchTab = props => {
 const MainTabBar = createBottomTabNavigator(
 	{
 		SearchTab,
-		AboutTab,
+		AboutTab: {
+			screen: About,
+			navigationOptions: ({ navigation }) => ({
+				tabBarLabel: 'About',
+				tabBarIcon: ({ focused }) => (
+					<Ionicons name="info-circle" size={26} color={focused ? '#58AADA' : 'grey'} />
+				),
+			}),
+		},
 	},
 	{
 		initialRouteName: 'SearchTab',
