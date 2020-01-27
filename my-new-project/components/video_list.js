@@ -53,9 +53,15 @@ class VideoList extends Component {
 
 	renderLoadingView() {
 		return (
-			<View style={styles.loading}>
+			<TouchableHighlight
+				style={styles.loading}
+				onPress={() => {
+					this.setState({ isLoading: false });
+				}}
+				underlayColor="orange"
+			>
 				<ActivityIndicator size="large" color="#0000ff" />
-			</View>
+			</TouchableHighlight>
 		);
 	}
 
@@ -96,8 +102,7 @@ class VideoList extends Component {
 						// this.fetchData();
 					}}
 				/>
-
-				{/* <ListView dataSource={this.state.dataSource} renderRow={this.renderVideoCell} style={styles.listView} /> */}
+				<FlatList data={[{ key: 'a' }, { key: 'b' }]} renderItem={({ item }) => <Text>{item.key}</Text>} />
 			</View>
 		);
 	}
