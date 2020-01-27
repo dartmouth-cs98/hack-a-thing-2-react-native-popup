@@ -19,4 +19,4 @@ React Native is probably still a good choice but we may save time building our o
 
 ### What Didn't Work
 
-I think we had the right idea about our approach to this hack a thing, but we ran into many roadblocks, such as neither of us being able to use the [paraboly pop-up library](https://reactnativeexample.com/customizable-report-modal-via-paraboly-for-react-native/) or the [multiple choice picker](https://github.com/nguythaitinh/react-native-multiple-choice-picker) even though the components and UI for both seemed so simple.
+I think we had the right idea about our approach to this hack a thing, but we ran into many roadblocks, such as neither of us being able to use the [paraboly pop-up library](https://reactnativeexample.com/customizable-report-modal-via-paraboly-for-react-native/) or the [multiple choice picker](https://github.com/nguythaitinh/react-native-multiple-choice-picker) even though the components and UI for both seemed so simple. I also couldn't get that far with converting old `ListView` code to `Flatview`, but I'm sure I would be fine if I had more time.

@@ -3,7 +3,7 @@ import Search from 'react-native-search-box';
 
 import { ActivityIndicator, StyleSheet, View, Image, Text, FlatList, TouchableHighlight } from 'react-native';
 
-// import youtubeSearch from '../services/youtube-api';
+import youtubeSearch from '../youtube-api';
 
 class VideoList extends Component {
 	static navigationOptions = {
@@ -19,12 +19,10 @@ class VideoList extends Component {
 		this.state = {
 			query: 'true facts',
 			isLoading: true,
-			// dataSource: new FlatList.DataSource({
-			// 	rowHasChanged: (row1, row2) => row1 !== row2,
-			// }),
+			data: [],
 		};
 
-		this.renderVideoCell = this.renderVideoCell.bind(this);
+		// this.renderVideoCell = this.renderVideoCell.bind(this);
 	}
 
 	// // ---------- componentDidMount here! -----------//
@@ -32,19 +30,20 @@ class VideoList extends Component {
 	// 	return this.fetchData();
 	// }
 
-	// // ------------ put fetchData here! -------------//
-	// fetchData() {
-	// 	youtubeSearch(this.state.query)
-	// 		.then(responseData => {
-	// 			this.setState({
-	// 				dataSource: this.state.dataSource.cloneWithRows(responseData),
-	// 				isLoading: false,
-	// 			});
-	// 		})
-	// 		.catch(error => {
-	// 			console.log(error);
-	// 		});
-	// }
+	// ------------ put fetchData here! -------------//
+	fetchData() {
+		youtubeSearch(this.state.query)
+			.then(responseData => {
+				console.log(responseData);
+				this.setState({
+					data: responseData,
+					isLoading: false,
+				});
+			})
+			.catch(error => {
+				console.log(error);
+			});
+	}
 
 	showVideoDetail(video) {
 		// pass in video into this.props.navigation.state.params.video in navigated view
@@ -65,27 +64,27 @@ class VideoList extends Component {
 		);
 	}
 
-	renderVideoCell(video) {
-		return (
-			<TouchableHighlight
-				onPress={() => {
-					this.showVideoDetail(video);
-				}}
-				underlayColor="orange"
-			>
-				<View>
-					<View style={styles.container}>
-						<Image source={{ uri: video.snippet.thumbnails.default.url }} style={styles.thumbnail} />
-						<View style={styles.rightContainer}>
-							<Text style={styles.title}>{video.snippet.title}</Text>
-							<Text style={styles.subtitle}>{video.snippet.description}</Text>
-						</View>
-					</View>
-					<View style={styles.separator} />
-				</View>
-			</TouchableHighlight>
-		);
-	}
+	// renderVideoCell(video) {
+	// 	return (
+	// 		<TouchableHighlight
+	// 			onPress={() => {
+	// 				this.showVideoDetail(video);
+	// 			}}
+	// 			underlayColor="orange"
+	// 		>
+	// 			<View>
+	// 				<View style={styles.container}>
+	// 					<Image source={{ uri: video.snippet.thumbnails.default.url }} style={styles.thumbnail} />
+	// 					<View style={styles.rightContainer}>
+	// 						<Text style={styles.title}>{video.snippet.title}</Text>
+	// 						<Text style={styles.subtitle}>{video.snippet.description}</Text>
+	// 					</View>
+	// 				</View>
+	// 				<View style={styles.separator} />
+	// 			</View>
+	// 		</TouchableHighlight>
+	// 	);
+	// }
 
 	render() {
 		if (this.state.isLoading) {
@@ -99,10 +98,37 @@ class VideoList extends Component {
 					textFieldBackgroundColor="#c4302b"
 					onChangeText={query => {
 						this.setState({ query });
-						// this.fetchData();
+						this.fetchData();
 					}}
 				/>
-				<FlatList data={[{ key: 'a' }, { key: 'b' }]} renderItem={({ item }) => <Text>{item.key}</Text>} />
+				{/* <FlatList data={[{ key: 'a' }, { key: 'b' }]} renderItem={({ item }) => <Text>{item.key}</Text>} /> */}
+				<FlatList
+					data={this.state.data}
+					showsVerticalScrollIndicator={false}
+					renderItem={({ item }) => (
+						<TouchableHighlight
+							onPress={() => {
+								this.showVideoDetail(item);
+							}}
+							underlayColor="orange"
+						>
+							<View>
+								<View style={styles.container}>
+									<Image
+										source={{ uri: item.snippet.thumbnails.default.url }}
+										style={styles.thumbnail}
+									/>
+									<View style={styles.rightContainer}>
+										<Text style={styles.title}>{item.snippet.title}</Text>
+										<Text style={styles.subtitle}>{item.snippet.description}</Text>
+									</View>
+								</View>
+								<View style={styles.separator} />
+							</View>
+						</TouchableHighlight>
+					)}
+					keyExtractor={item => item.title}
+				/>
 			</View>
 		);
 	}

@@ -1,12 +1,12 @@
 import axios from 'axios';
 
 const API_URL = 'https://www.googleapis.com/youtube/v3/search';
-// const API_KEY = 'YOUR SAVED API KEY';
+const API_KEY = 'AIzaSyCCdbYl6Cu14MpzMn7QzgKdADhHUd0bpWA';
 
 const youtubeSearch = term => {
 	const params = {
 		part: 'snippet',
-		key: AIzaSyCCdbYl6Cu14MpzMn7QzgKdADhHUd0bpWA,
+		key: API_KEY,
 		q: term,
 		type: 'video',
 	};
