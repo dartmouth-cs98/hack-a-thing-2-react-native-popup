@@ -46,8 +46,8 @@ export default function HomeScreen() {
 
         <View style={styles.helpContainer}>
           <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
-	  <Text style={styles.helpLinkText}>
-              Help, it didn’t automatically reload! Yes it did!
+            <Text style={styles.helpLinkText}>
+              Help, it didn’t automatically reload!
             </Text>
           </TouchableOpacity>
         </View>
@@ -103,9 +103,7 @@ function handleLearnMorePress() {
 }
 
 function handleHelpPress() {
-  WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/versions/latest/workflow/up-and-running/#cant-see-your-changes'
-  );
+  <ReportModal/>
 }
 
 const styles = StyleSheet.create({
