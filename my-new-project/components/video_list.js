@@ -26,9 +26,9 @@ class VideoList extends Component {
 	}
 
 	// // ---------- componentDidMount here! -----------//
-	// componentDidMount() {
-	// 	return this.fetchData();
-	// }
+	componentDidMount() {
+		return this.fetchData();
+	}
 
 	// ------------ put fetchData here! -------------//
 	fetchData() {
@@ -52,15 +52,9 @@ class VideoList extends Component {
 
 	renderLoadingView() {
 		return (
-			<TouchableHighlight
-				style={styles.loading}
-				onPress={() => {
-					this.setState({ isLoading: false });
-				}}
-				underlayColor="orange"
-			>
+			<View style={styles.loading}>
 				<ActivityIndicator size="large" color="#0000ff" />
-			</TouchableHighlight>
+			</View>
 		);
 	}
 
