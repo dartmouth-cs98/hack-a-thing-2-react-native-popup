@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Search from 'react-native-search-box';
 
-import { ActivityIndicator, StyleSheet, View, Image, Text, ListView, TouchableHighlight } from 'react-native';
+import { ActivityIndicator, StyleSheet, View, Image, Text, FlatList, TouchableHighlight } from 'react-native';
 
-import youtubeSearch from '../services/youtube-api';
+// import youtubeSearch from '../services/youtube-api';
 
 class VideoList extends Component {
 	static navigationOptions = {
@@ -19,31 +19,32 @@ class VideoList extends Component {
 		this.state = {
 			query: 'true facts',
 			isLoading: true,
-			dataSource: new ListView.DataSource({
-				rowHasChanged: (row1, row2) => row1 !== row2,
-			}),
+			// dataSource: new FlatList.DataSource({
+			// 	rowHasChanged: (row1, row2) => row1 !== row2,
+			// }),
 		};
 
 		this.renderVideoCell = this.renderVideoCell.bind(this);
 	}
 
-  // ---------- componentDidMount here! -----------//
-  componentDidMount() {
-    return this.fetchData();
-  }
+	// // ---------- componentDidMount here! -----------//
+	// componentDidMount() {
+	// 	return this.fetchData();
+	// }
 
-  // ------------ put fetchData here! -------------//
-  fetchData() {
-    youtubeSearch(this.state.query)
-      .then((responseData) => {
-        this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(responseData),
-          isLoading: false,
-        });
-      }).catch((error) => {
-        console.log(error);
-      });
-  }
+	// // ------------ put fetchData here! -------------//
+	// fetchData() {
+	// 	youtubeSearch(this.state.query)
+	// 		.then(responseData => {
+	// 			this.setState({
+	// 				dataSource: this.state.dataSource.cloneWithRows(responseData),
+	// 				isLoading: false,
+	// 			});
+	// 		})
+	// 		.catch(error => {
+	// 			console.log(error);
+	// 		});
+	// }
 
 	showVideoDetail(video) {
 		// pass in video into this.props.navigation.state.params.video in navigated view
@@ -92,27 +93,16 @@ class VideoList extends Component {
 					textFieldBackgroundColor="#c4302b"
 					onChangeText={query => {
 						this.setState({ query });
-						this.fetchData();
+						// this.fetchData();
 					}}
 				/>
 
-				<ListView dataSource={this.state.dataSource} renderRow={this.renderVideoCell} style={styles.listView} />
+				{/* <ListView dataSource={this.state.dataSource} renderRow={this.renderVideoCell} style={styles.listView} /> */}
 			</View>
 		);
 	}
 }
 
-fetchData() {
-  youtubeSearch(this.state.query)
-    .then((responseData) => {
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(responseData),
-        isLoading: false,
-      });
-    }).catch((error) => {
-      console.log(error);
-    });
-}
 export default VideoList;
 
 const styles = StyleSheet.create({

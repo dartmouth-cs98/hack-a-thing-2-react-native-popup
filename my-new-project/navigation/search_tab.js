@@ -2,18 +2,18 @@ import React from 'react';
 import { createStackNavigator } from 'react-navigation-stack';
 import Ionicons from 'react-native-vector-icons/FontAwesome';
 import { Button } from 'react-native';
+import VideoList from '../components/video_list';
 
-// import VideoList from '../components/video_list';
 // import VideoDetail from '../components/video_detail';
 
-const TempSearch = props => (
-	<Button
-		onPress={() => {
-			props.navigation.navigate('Detail');
-		}}
-		title="next"
-	/>
-);
+// const TempSearch = props => (
+// 	<Button
+// 		onPress={() => {
+// 			props.navigation.navigate('Detail');
+// 		}}
+// 		title="next"
+// 	/>
+// );
 const TempDetail = props => (
 	<Button
 		onPress={() => {
@@ -26,7 +26,7 @@ const TempDetail = props => (
 // nest stack navigator to handle two internal views
 const SearchTab = createStackNavigator({
 	// keys are the names of the "routes"
-	Search: TempSearch,
+	Search: VideoList,
 	Detail: TempDetail,
 });
 
